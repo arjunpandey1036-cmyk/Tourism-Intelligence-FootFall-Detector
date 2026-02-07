@@ -1,0 +1,131 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  width: 850px;
+  height: 500px;
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.form-container {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  padding: 60px;
+  transition: all 0.6s ease-in-out;
+  top: 0;
+}
+
+.form-container h2 {
+  margin-bottom: 10px;
+}
+
+.form-container p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: #2c5364;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.form-container button:hover {
+  background: #203a43;
+}
+
+.overlay {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  right: 0;
+  background: linear-gradient(135deg, #2c5364, #0f2027);
+  color: #fff;
+  padding: 60px;
+  transition: all 0.6s ease-in-out;
+}
+
+.overlay h1 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.overlay p {
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.overlay button {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.overlay button:hover {
+  background: #fff;
+  color: #2c5364;
+}
+
+.container.signup-active .overlay {
+  transform: translateX(-100%);
+}
+}
+
+.container.signup-active .login {
+ transform: translateX(100%);
+  opacity: 0;
+}
+
+.container.signup-active .signup {
+   transform: translateX(100%);
+  opacity: 1;
+  z-index: 2;
+}
+
+
+
+.signup {
+   left: 0;
+  opacity: 0;
+  z-index: 1;
+}

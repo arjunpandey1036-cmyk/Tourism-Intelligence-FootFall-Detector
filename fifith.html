@@ -1,0 +1,53 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tourism Intelligence | Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container" id="container">
+    <div class="form-container login">
+      <h2>Welcome Back</h2>
+      <p>Access tourism intelligence insights</p>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button>Login</button>
+    </div>
+
+    <div class="form-container signup">
+      <h2>Create Account</h2>
+      <p>Join the future of smart tourism</p>
+      <input type="text" placeholder="Full Name" />
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button>Sign Up</button>
+    </div>
+
+    <div class="overlay">
+      <h1>Tourism Intelligence</h1>
+      <p>Where travel meets data-driven intelligence</p>
+      <button id="toggleBtn">Sign Up</button>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const toggleBtn = document.getElementById('toggleBtn');
+    let signup = false;
+
+    toggleBtn.addEventListener('click', () => {
+      signup = !signup;
+      container.classList.toggle('signup-active');
+      toggleBtn.textContent = signup ? 'Login' : 'Sign Up';
+    });
+  </script>
+
+</body>
+</html>
+
+

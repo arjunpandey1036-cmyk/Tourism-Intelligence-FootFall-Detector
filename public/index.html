@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tourism Intelligence | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/auth.css" />
+  </head>
+  <body>
+    <div class="auth-bg"></div>
+    <div class="auth-bg auth-bg-2"></div>
+    <main class="auth-shell" id="container">
+      <section class="auth-card auth-login">
+        <h2>Welcome Back</h2>
+        <p>Access tourism intelligence insights</p>
+        <form id="loginForm">
+          <input id="loginEmail" type="email" placeholder="Email" required />
+          <input id="loginPassword" type="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </section>
+
+      <section class="auth-card auth-signup">
+        <h2>Create Account</h2>
+        <p>Join the future of smart tourism</p>
+        <form id="signupForm">
+          <input id="signupName" type="text" placeholder="Full Name" required />
+          <input id="signupEmail" type="email" placeholder="Email" required />
+          <input id="signupPassword" type="password" placeholder="Password" required />
+          <button type="submit">Sign Up</button>
+        </form>
+      </section>
+
+      <aside class="auth-overlay">
+        <h1>Tourism Intelligence</h1>
+        <p>Where travel meets data-driven crowd intelligence</p>
+        <button id="toggleBtn" type="button">Sign Up</button>
+      </aside>
+    </main>
+
+    <footer class="auth-about">
+      <span>Built for Tourism Intelligence + Crowd Analytics Demo</span>
+      <div class="auth-about-actions">
+        <a href="/welcome">Welcome</a>
+        <a href="/about">About Project</a>
+      </div>
+    </footer>
+
+    <script src="/auth.js"></script>
+  </body>
+</html>
+

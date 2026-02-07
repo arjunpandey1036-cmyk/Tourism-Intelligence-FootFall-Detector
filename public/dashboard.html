@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tourism Intelligence | Smart Crowd Avoidance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="theme-dark">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="bg-grid"></div>
+
+    <header class="app-header glass-panel lift-in">
+      <div>
+        <h1>Tourism Intelligence Global</h1>
+        <p>Smart Crowd Avoidance + Dynamic City Trip Planner</p>
+      </div>
+      <div class="header-meta">
+        <button id="openAddPlaceBtn" class="primary-btn">+ Add Place</button>
+        <div id="menuWrap" class="menu-wrap">
+          <button
+            id="menuToggleBtn"
+            class="menu-toggle secondary-btn"
+            type="button"
+            aria-expanded="false"
+            aria-controls="headerMenu"
+            aria-label="Open controls menu"
+          >
+            &#8942;
+          </button>
+          <div id="headerMenu" class="header-menu hidden">
+            <div id="currentUser" class="user-chip user-chip-menu">Guest</div>
+            <label class="scenario-wrap scenario-wrap-menu" for="scenarioSelect">
+              <span>Scenario</span>
+              <select id="scenarioSelect" class="secondary-select">
+                <option value="normal">Normal</option>
+                <option value="weekend">Weekend Surge</option>
+                <option value="festival">Festival Peak</option>
+              </select>
+            </label>
+            <button id="themeToggleBtn" class="secondary-btn">Light Mode</button>
+            <button id="aboutBtn" class="secondary-btn">About</button>
+            <button id="welcomeBtn" class="secondary-btn">Welcome</button>
+            <button id="demoStoryBtn" class="primary-btn">Play Demo Story</button>
+            <button id="refreshBtn" class="secondary-btn">Refresh Data</button>
+            <div id="lastUpdated" class="menu-last-updated">Last updated: --</div>
+            <button id="logoutBtn" class="secondary-btn">Logout</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-grid lift-in">
+      <section class="panel panel-left glass-panel fade-rise">
+        <div class="section-heading-row">
+          <h2>Tourist Places</h2>
+          <div class="places-controls">
+            <label class="places-view-wrap" for="indiaCitySelect">
+              <span>City</span>
+              <select id="indiaCitySelect" class="secondary-select">
+                <option value="all">All Cities</option>
+              </select>
+            </label>
+            <label class="places-view-wrap" for="placesViewSelect">
+              <span>View</span>
+              <select id="placesViewSelect" class="secondary-select">
+                <option value="smart">Smart Sort</option>
+                <option value="low-only">Low Crowd</option>
+                <option value="medium-only">Medium Crowd</option>
+                <option value="high-only">High Crowd</option>
+                <option value="top-rated">Top Rated</option>
+                <option value="most-visited">Most Visited</option>
+                <option value="name-az">Name A-Z</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <p class="muted">Live crowd levels update every 20 seconds.</p>
+        <div id="placesList" class="places-list"></div>
+      </section>
+
+      <section class="panel panel-center glass-panel fade-rise">
+        <h2>Interactive Map</h2>
+        <div class="map-actions">
+          <button id="heatToggleBtn" class="secondary-btn">Heatmap: On</button>
+          <span class="tile-badge">OpenStreetMap + Leaflet</span>
+          <span id="routeBadge" class="tile-badge">Tour Route: Off</span>
+        </div>
+        <div class="map-shell">
+          <div id="mapStatusOverlay" class="map-status-overlay hidden"></div>
+          <div id="map" class="map"></div>
+        </div>
+        <div class="legend">
+          <span><i class="dot dot-low"></i>Low</span>
+          <span><i class="dot dot-medium"></i>Medium</span>
+          <span><i class="dot dot-high"></i>High</span>
+          <span class="heat-pill">Heat Intensity = Current Footfall</span>
+        </div>
+        <section class="forecast-shell">
+          <h3>Crowd Forecast (Next 3 Hours)</h3>
+          <div id="forecastPanel" class="forecast-panel">
+            <p class="muted">Select a place to see forecast.</p>
+          </div>
+        </section>
+        <div id="centerInsights" class="center-insights"></div>
+      </section>
+
+      <section class="panel panel-right glass-panel fade-rise">
+        <h2>Visit Intelligence</h2>
+        <div id="selectedPlaceCard" class="selected-card">
+          <p class="muted">Select a place to view recommendations.</p>
+        </div>
+        <h3>City Tour Route</h3>
+        <div id="tourRouteSummary" class="tour-route-summary">
+          <p class="muted">Select Jaipur in City filter to show route on map.</p>
+        </div>
+        <h3>Tour Guide Booking</h3>
+        <div id="guidesList" class="guides-list">
+          <p class="muted">Loading tour guides...</p>
+        </div>
+        <form id="guideBookingForm" class="guide-booking-form">
+          <div class="field-grid">
+            <select id="guideSelect" required>
+              <option value="">Select guide</option>
+            </select>
+            <input id="bookingName" type="text" placeholder="Your name" maxlength="80" required />
+          </div>
+          <div class="field-grid">
+            <input id="bookingPhone" type="text" placeholder="Phone number" maxlength="20" required />
+            <input id="bookingDate" type="date" required />
+          </div>
+          <div class="field-grid">
+            <input id="bookingTime" type="time" required />
+            <input id="bookingHours" type="number" min="1" max="12" value="4" required />
+          </div>
+          <textarea
+            id="bookingNotes"
+            rows="2"
+            maxlength="800"
+            placeholder="Extra requests (optional)"
+          ></textarea>
+          <div id="guideBookingStatus" class="guide-booking-status muted">
+            Select a guide and submit to request confirmation.
+          </div>
+          <button id="bookGuideBtn" type="submit" class="primary-btn">Book Tour Guide</button>
+        </form>
+
+        <h3>Ratings & Reviews</h3>
+        <div id="reviewSummary" class="review-summary">
+          <p class="muted">Select a place to see ratings and reviews.</p>
+        </div>
+        <div id="reviewTrustPanel" class="review-trust-panel">
+          <p class="muted">Trust signals will appear after selecting a place.</p>
+        </div>
+        <div id="reviewsList" class="reviews-list"></div>
+        <form id="reviewForm" class="review-form">
+          <div class="field-grid">
+            <input id="reviewAlias" type="text" placeholder="Your name (optional)" maxlength="60" />
+            <select id="reviewRating">
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Good</option>
+              <option value="3">3 - Average</option>
+              <option value="2">2 - Poor</option>
+              <option value="1">1 - Very Poor</option>
+            </select>
+          </div>
+          <textarea
+            id="reviewComment"
+            rows="3"
+            maxlength="900"
+            placeholder="Write your review for this place..."
+            required
+          ></textarea>
+          <textarea
+            id="reviewPhotos"
+            rows="2"
+            maxlength="2500"
+            placeholder="Photo URLs (optional, comma/newline separated, up to 6)"
+          ></textarea>
+          <button id="submitReviewBtn" type="submit" class="primary-btn">Submit Review</button>
+        </form>
+
+        <h3>Nearby Alternatives</h3>
+        <div id="alternativesList" class="alternatives-list">
+          <p class="muted">Alternatives appear when a place is crowded.</p>
+        </div>
+
+        <h3>Analytics Snapshot</h3>
+        <div id="overviewCards" class="overview-cards"></div>
+        <h3>Demo Impact</h3>
+        <div id="impactCards" class="impact-cards">
+          <p class="muted">Impact metrics load with live data.</p>
+        </div>
+
+        <h3>Smart Itinerary</h3>
+        <form id="itineraryForm" class="itinerary-form">
+          <div class="field-grid">
+            <input id="itineraryCity" type="text" placeholder="City filter (optional)" />
+            <input id="itineraryHours" type="number" min="2" max="12" value="6" placeholder="Hours" />
+          </div>
+          <div class="field-grid">
+            <input id="itineraryStartHour" type="number" min="0" max="23" value="9" placeholder="Start hour" />
+            <input id="itineraryMaxPlaces" type="number" min="2" max="8" value="4" placeholder="Max places" />
+          </div>
+          <button id="generateItineraryBtn" type="submit" class="primary-btn">Generate Smart Plan</button>
+        </form>
+        <div id="itineraryOutput" class="itinerary-output">
+          <p class="muted">Generate an itinerary to show route intelligence.</p>
+        </div>
+
+        <h3>Recent Check-ins</h3>
+        <div id="recentCheckIns" class="recent-list"></div>
+      </section>
+    </main>
+
+    <footer class="site-about glass-panel fade-rise">
+      <div>
+        <h3>About This Project</h3>
+        <p>
+          Tourism Intelligence Global helps travelers avoid crowd-heavy places using live footfall,
+          forecasts, diversion suggestions, and smart itinerary planning.
+        </p>
+      </div>
+      <a href="/about" class="secondary-btn about-link-btn">Read Full About</a>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+    <div id="modalBackdrop" class="modal-backdrop hidden"></div>
+    <section id="addPlaceModal" class="modal hidden glass-panel" aria-hidden="true">
+      <div class="modal-head">
+        <h3>Add Place (Anywhere in the World)</h3>
+        <button id="closeAddPlaceBtn" class="secondary-btn" type="button">Close</button>
+      </div>
+      <form id="addPlaceForm" class="add-place-form">
+        <div class="field-grid">
+          <input id="placeName" type="text" placeholder="Place Name" required maxlength="120" />
+          <input id="placeCategory" type="text" placeholder="Category (Landmark, Nature, etc.)" />
+        </div>
+        <textarea
+          id="placeDescription"
+          rows="3"
+          placeholder="Short description"
+          maxlength="500"
+        ></textarea>
+        <textarea
+          id="placeHistory"
+          rows="3"
+          placeholder="Historical background (optional)"
+          maxlength="800"
+        ></textarea>
+
+        <div class="search-row">
+          <input id="geocodeQuery" type="text" placeholder="Search location worldwide (ex: Eiffel Tower, Paris)" />
+          <button id="geocodeBtn" type="button" class="secondary-btn">Find Location</button>
+        </div>
+        <div id="geocodeResults" class="geocode-results"></div>
+
+        <div class="field-grid">
+          <input id="placeLat" type="number" step="any" placeholder="Latitude" required />
+          <input id="placeLng" type="number" step="any" placeholder="Longitude" required />
+        </div>
+        <div class="field-grid">
+          <input id="placeTags" type="text" placeholder="Tags (comma-separated)" />
+          <input
+            id="placeDuration"
+            type="number"
+            min="15"
+            max="480"
+            value="60"
+            placeholder="Avg visit minutes"
+          />
+        </div>
+        <button id="addPlaceSubmitBtn" type="submit" class="primary-btn">Add Place</button>
+      </form>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
+

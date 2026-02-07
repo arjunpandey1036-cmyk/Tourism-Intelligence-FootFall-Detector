@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Tourism Intelligence Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/about.css" />
+  </head>
+  <body class="theme-dark">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="grid-overlay"></div>
+
+    <main class="about-shell">
+      <header class="about-header glass">
+        <div>
+          <h1>About Tourism Intelligence Global</h1>
+          <p>Smart Crowd Avoidance + Dynamic City Trip Planner + Footfall Analytics</p>
+        </div>
+        <div class="header-actions">
+          <button id="themeToggleBtn" class="btn secondary-btn" type="button">Light Mode</button>
+          <a class="btn secondary-btn" href="/welcome">Welcome</a>
+          <a class="btn secondary-btn" href="/login">Login</a>
+          <a class="btn primary-btn" href="/app">Back to Dashboard</a>
+        </div>
+      </header>
+
+      <section class="about-grid">
+        <article class="about-card glass">
+          <h2>What This Project Solves</h2>
+          <p>
+            Tourists avoid overcrowded hotspots using live crowd levels, best-time recommendations,
+            nearby low-crowd alternatives, crowd forecast, and smart itinerary planning.
+          </p>
+        </article>
+
+        <article class="about-card glass">
+          <h2>Hackathon Demo Value</h2>
+          <ul>
+            <li>Scenario simulator: Normal, Weekend Surge, Festival Peak</li>
+            <li>Impact KPIs: avoided overcrowded spots, wait-time saved, diversion success</li>
+            <li>One-click demo story for judges with guided flow</li>
+          </ul>
+        </article>
+
+        <article class="about-card glass">
+          <h2>Core Features</h2>
+          <ul>
+            <li>Live check-ins with real-time crowd levels</li>
+            <li>Crowd forecast for next 3 hours per place</li>
+            <li>Smart itinerary generation with time window optimization</li>
+            <li>Review + rating + photo-backed social trust signals</li>
+          </ul>
+        </article>
+
+        <article class="about-card glass">
+          <h2>Tech Stack</h2>
+          <ul>
+            <li>Frontend: HTML, CSS, JavaScript (Vanilla)</li>
+            <li>Backend: Node.js + Express</li>
+            <li>Database: MongoDB + Mongoose</li>
+            <li>Maps: OpenStreetMap + Leaflet + Heatmap</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const THEME_STORAGE_KEY = "tourism_theme_mode";
+        const button = document.getElementById("themeToggleBtn");
+        const allowed = new Set(["dark", "light"]);
+
+        function readTheme() {
+          try {
+            const value = localStorage.getItem(THEME_STORAGE_KEY);
+            return allowed.has(value) ? value : "dark";
+          } catch (_error) {
+            return "dark";
+          }
+        }
+
+        function writeTheme(value) {
+          try {
+            localStorage.setItem(THEME_STORAGE_KEY, value);
+          } catch (_error) {
+            // Ignore storage issues.
+          }
+        }
+
+        function applyTheme(value) {
+          const theme = allowed.has(value) ? value : "dark";
+          document.body.classList.remove("theme-dark", "theme-light");
+          document.body.classList.add(`theme-${theme}`);
+          button.textContent = theme === "dark" ? "Light Mode" : "Dark Mode";
+          return theme;
+        }
+
+        let currentTheme = applyTheme(readTheme());
+        button.addEventListener("click", function () {
+          currentTheme = currentTheme === "dark" ? "light" : "dark";
+          applyTheme(currentTheme);
+          writeTheme(currentTheme);
+        });
+      })();
+    </script>
+  </body>
+</html>
+

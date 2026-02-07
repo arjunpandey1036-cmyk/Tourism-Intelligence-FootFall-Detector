@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome | Tourism Intelligence Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/welcome.css" />
+  </head>
+  <body class="theme-dark">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="grid-overlay"></div>
+
+    <header class="welcome-header glass-panel lift-up">
+      <div>
+        <p class="eyebrow">Tourism Intelligence Global</p>
+        <h1>Welcome to Smart Crowd Avoidance</h1>
+        <p class="subtext">Plan better trips with live crowd intelligence, smart alternatives, and predictive visit insights.</p>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="btn secondary-btn" type="button">Light Mode</button>
+        <a class="btn secondary-btn" href="/about">About</a>
+        <a class="btn secondary-btn" href="/login">Login</a>
+        <a id="dashboardLink" class="btn primary-btn" href="/app">Open Dashboard</a>
+      </div>
+    </header>
+
+    <main class="welcome-main">
+      <section class="hero glass-panel fade-rise">
+        <div class="hero-copy">
+          <p class="hero-kicker">Tourism + AI + Real-Time Signals</p>
+          <h2 id="heroTitle">Explore Cities Without The Crowd Stress</h2>
+          <p>
+            This platform helps travelers avoid peak congestion, discover nearby low-crowd alternatives,
+            and build time-aware itineraries backed by live check-ins and ratings.
+          </p>
+          <div class="cta-row">
+            <a id="primaryCta" class="btn primary-btn" href="/login">Get Started</a>
+            <a class="btn secondary-btn" href="/app">View Live Dashboard</a>
+          </div>
+          <p id="sessionInfo" class="session-info">No active session. Log in with any email and password.</p>
+        </div>
+
+        <div class="hero-stats">
+          <article class="stat-card">
+            <strong>Real-Time Crowd</strong>
+            <span>Low, Medium, High crowd levels update continuously.</span>
+          </article>
+          <article class="stat-card">
+            <strong>Smart Diversion</strong>
+            <span>Nearby alternatives recommended when hotspots are overloaded.</span>
+          </article>
+          <article class="stat-card">
+            <strong>Forecast + Itinerary</strong>
+            <span>Predictive windows and route-aware planning for smoother trips.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="feature-grid">
+        <article class="feature-card glass-panel fade-rise">
+          <h3>Interactive City Map</h3>
+          <p>Leaflet map with live markers and crowd heatmap for fast decision-making.</p>
+        </article>
+        <article class="feature-card glass-panel fade-rise">
+          <h3>Ratings + Reviews + Photos</h3>
+          <p>Social proof from visitors with score breakdown, comments, and place photos.</p>
+        </article>
+        <article class="feature-card glass-panel fade-rise">
+          <h3>Scenario-Based Demo</h3>
+          <p>Switch between normal, weekend surge, and festival conditions in one click.</p>
+        </article>
+      </section>
+
+      <section class="journey glass-panel fade-rise">
+        <h3>Quick Journey</h3>
+        <ol>
+          <li>Log in quickly using any email and password.</li>
+          <li>Select a place and inspect live crowd level + best time windows.</li>
+          <li>Check alternatives, read reviews, and generate a smart itinerary.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="welcome-footer glass-panel fade-rise">
+      <span>Built for hackathon storytelling and tourism intelligence demos.</span>
+      <div class="footer-actions">
+        <button id="logoutBtn" class="btn secondary-btn hidden" type="button">Logout Session</button>
+        <a class="btn secondary-btn" href="/about">Read About Project</a>
+      </div>
+    </footer>
+
+    <script src="/welcome.js"></script>
+  </body>
+</html>
