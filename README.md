@@ -66,13 +66,6 @@ Prerequisites: Make sure you have **Node.js** and **MongoDB** installed locally.
     npm start
     ```
 
-5.  **Access the Dashboard**
-    Open your browser and navigate to `http://localhost:3000`.
-
-## 📸 Screenshots
-
-*(Add screenshots of your Glassmorphism dashboard and Heatmaps here)*
-
 ## 🔮 Future Scope
 
 * **AI Integration:** Implementing predictive ML models for seasonal crowd forecasting.
