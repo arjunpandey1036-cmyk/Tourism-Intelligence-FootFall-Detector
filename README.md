@@ -75,7 +75,3 @@ Prerequisites: Make sure you have **Node.js** and **MongoDB** installed locally.
 ## 🤝 Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request for any feature enhancements or bug fixes.
-
----
-
-**Developed with ❤️ for Smarter Urban Mobility.**
